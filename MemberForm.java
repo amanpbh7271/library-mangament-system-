@@ -1,4 +1,7 @@
+import javafx.scene.control.ComboBox;
+
 import javax.swing.JComboBox;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -13,11 +16,14 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.DefaultComboBoxModel;
 
 public class MemberForm extends JFrame {
@@ -80,11 +86,7 @@ public class MemberForm extends JFrame {
 		textField_2.setBounds(212, 160, 124, 19);
 		textField_2.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(259, 184, 84, 24);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher"}));
-		comboBox.setToolTipText("");
-		
+	final	JComboBox comboBox = new JComboBox();
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.setBounds(97, 233, 114, 25);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -92,12 +94,16 @@ public class MemberForm extends JFrame {
 	             String name=textField.getText();
 	             String contact=textField_1.getText();
 	             String address=textField_2.getText();
-			     String type=comboBox.getSelectedItem().toString();
+//			     String type=comboBox.getSelectedItem().toString();
+	             
+	             String type=comboBox.getSelectedItem().toString();		    
+			   
 			   //  System.out.println(type);
 			  int i=MemberDao.save(name, contact, address, type);           
 			  if(i>0){
 					JOptionPane.showMessageDialog(MemberForm.this,"Books added successfully!");
 					LibrarianSuccess.main(new String[]{});
+					
 					frame.dispose();
 				
 				}else{
@@ -123,8 +129,12 @@ public class MemberForm extends JFrame {
 		contentPane.add(textField);
 		contentPane.add(textField_1);
 		contentPane.add(textField_2);
-		contentPane.add(comboBox);
 		contentPane.add(btnNewButton);
 		contentPane.add(btnBack);
+		
+		
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher"}));
+		comboBox.setBounds(222, 186, 64, 20);
+		contentPane.add(comboBox);
 	}
 }

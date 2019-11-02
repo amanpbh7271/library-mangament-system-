@@ -5,8 +5,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,18 +24,14 @@ public class UpdateBookFrom extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
 	private JButton btnSubmit;
 	private JButton btnBack;
-
+	 static UpdateBookFrom frame;
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +39,7 @@ public class UpdateBookFrom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UpdateBookFrom frame = new UpdateBookFrom();
+					 frame = new UpdateBookFrom();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +63,7 @@ public class UpdateBookFrom extends JFrame {
 		lblUpdateBookForm.setBounds(157, 26, 126, 15);
 		contentPane.add(lblUpdateBookForm);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Id");
 		lblNewLabel.setBounds(109, 53, 66, 15);
 		contentPane.add(lblNewLabel);
 		
@@ -112,11 +110,14 @@ public class UpdateBookFrom extends JFrame {
 			 			textField_3.setText(rs.getString("author"));
 			 			textField_4.setText(rs.getString("publisher"));
 			 			textField_5.setText(rs.getString("quantity"));
-			 			textField_6.setText(rs.getString("issued"));
-			 			textField_7.setText(rs.getString("added_date"));
+			 			
 			 			//textField_8.setText(rs.getString("author"));
 			 		}
+			 		else
+			 		{
+			 			JOptionPane.showMessageDialog(UpdateBookFrom.this,"Record not found!");
 			 		
+			 		}
 			 		
 			 		
 			 	//	status=ps2.executeUpdate();
@@ -142,50 +143,60 @@ public class UpdateBookFrom extends JFrame {
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(219, 296, 124, 19);
-		contentPane.add(textField_6);
-		textField_6.setColumns(10);
-		
-		textField_7 = new JTextField();
-		textField_7.setBounds(219, 327, 124, 19);
-		contentPane.add(textField_7);
-		textField_7.setColumns(10);
-		
-		lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1 = new JLabel("CallNO");
 		lblNewLabel_1.setBounds(109, 96, 66, 15);
 		contentPane.add(lblNewLabel_1);
 		
-		lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2 = new JLabel("Name");
 		lblNewLabel_2.setBounds(109, 142, 66, 15);
 		contentPane.add(lblNewLabel_2);
 		
-		lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3 = new JLabel("author");
 		lblNewLabel_3.setBounds(109, 181, 66, 15);
 		contentPane.add(lblNewLabel_3);
 		
-		lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4 = new JLabel("publisher");
 		lblNewLabel_4.setBounds(109, 229, 66, 15);
 		contentPane.add(lblNewLabel_4);
 		
-		lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5 = new JLabel("qunatity");
 		lblNewLabel_5.setBounds(109, 265, 66, 15);
 		contentPane.add(lblNewLabel_5);
 		
-		lblNewLabel_6 = new JLabel("New label");
-		lblNewLabel_6.setBounds(109, 298, 66, 15);
-		contentPane.add(lblNewLabel_6);
-		
-		lblNewLabel_7 = new JLabel("New label");
-		lblNewLabel_7.setBounds(109, 329, 66, 15);
-		contentPane.add(lblNewLabel_7);
-		
-		btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(98, 371, 114, 25);
+		btnSubmit = new JButton("Update");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int  id=Integer.parseInt(name.getText());
+				String callno=textField_1.getText();
+				String names=textField_2.getText();
+				String author=textField_3.getText();
+				String publisher=textField_4.getText();
+				String quantity=textField_5.getText();
+			 int ch= BookDao.update(id, callno, names, author, publisher, quantity);
+			 if(ch>0)
+			      {
+				 JOptionPane.showMessageDialog(UpdateBookFrom.this,"book updated successfully!");
+				 LibrarianSuccess.main(new String[]{});
+				 frame.dispose();
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(UpdateBookFrom.this,"book not updated successfully!");
+			}
+			
+			}
+		});
+		btnSubmit.setBounds(113, 324, 114, 25);
 		contentPane.add(btnSubmit);
 		
 		btnBack = new JButton("Back");
-		btnBack.setBounds(258, 371, 114, 25);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LibrarianSuccess.main(new String[]{});
+				frame.dispose();
+			}
+		});
+		btnBack.setBounds(268, 324, 114, 25);
 		contentPane.add(btnBack);
 	}
 
