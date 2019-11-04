@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ReturnBookDao {
+private	String bookcallno;
+private int studentid;
 	public static int delete(String bookcallno,int studentid){
 		int status=0;
 		try{

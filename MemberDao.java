@@ -3,8 +3,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class MemberDao {
-
-
+private	int id;
+private	String name;
+private String contact_no;
+private String address;
+private  String type;
+	
 		public static int save(String name,String contact_no,String address,String type){
 			int status=0;
 			try{

@@ -3,6 +3,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class BookDao {
+private	int id;
+private	String callno;
+private	String name;
+private String author;
+private String publisher;
+private int quantity;
+	
 public static int save(String callno,String name,String author,String publisher,int quantity){
 	int status=0;
 	try{

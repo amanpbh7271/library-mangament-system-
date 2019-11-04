@@ -69,11 +69,11 @@ public class IssueBookForm extends JFrame {
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		
-		JLabel lblStudentId = new JLabel("Student Id:");
+		JLabel lblStudentId = new JLabel("Member Id:");
 		
-		JLabel lblStudentName = new JLabel("Student Name:");
+		JLabel lblStudentName = new JLabel("Member Name:");
 		
-		JLabel lblStudentContact = new JLabel("Stu Contact no:");
+		JLabel lblStudentContact = new JLabel("Mem Contact no:");
 		
 		JButton btnIssueBook = new JButton("Issue Book");
 		btnIssueBook.addActionListener(new ActionListener() {
@@ -84,7 +84,7 @@ public class IssueBookForm extends JFrame {
 			String studentname=textField_3.getText();
 			String studentcontact=textField_4.getText();
 			
-			if(IssueBookDao.checkBook(bookcallno)){
+			if(IssueBookDao.checkBook(bookcallno)&& MemberDao.checkMember(studentid)){
 			
 			int i=IssueBookDao.save(bookcallno, studentid, studentname, studentcontact);
 			if(i>0){
@@ -97,7 +97,7 @@ public class IssueBookForm extends JFrame {
 			}//end of save if-else
 			
 			}else{
-				JOptionPane.showMessageDialog(IssueBookForm.this,"Sorry, Callno doesn't exist!");
+				JOptionPane.showMessageDialog(IssueBookForm.this,"Sorry,Chaeck  Callno and Member Id");
 			}//end of checkbook if-else
 			
 			}
@@ -111,7 +111,7 @@ public class IssueBookForm extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Note: Please check Student ID Carefully before issuing book!");
+		JLabel lblNewLabel_1 = new JLabel("Note: Please check Member ID Carefully before issuing book!");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel_1.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

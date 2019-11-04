@@ -69,7 +69,12 @@ public class UpdateMemberForm extends JFrame {
 		textField.setBounds(178, 75, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
+	final	JLabel lblType_1 = new JLabel("type");
+		lblType_1.setBounds(178, 216, 46, 14);
+		contentPane.add(lblType_1);
+	
+		final	JComboBox comboBox = new JComboBox();
 		JButton btnNewButton = new JButton("Search");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -86,13 +91,14 @@ public class UpdateMemberForm extends JFrame {
 							textField_1.setText(rs.getString("name"));
 				 			textField_2.setText(rs.getString("contact"));
 				 			textField_3.setText(rs.getString("address"));
-				             			
+				 			lblType_1.setText(rs.getString("type"));
+						
 						}
 						con.close();
 						}
 						else
 						{
-							
+							 JOptionPane.showMessageDialog(UpdateMemberForm.this,"member not found!");
 						}
 					}catch(Exception e){System.out.println(e);}
 
@@ -132,10 +138,10 @@ public class UpdateMemberForm extends JFrame {
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
-	final	JComboBox comboBox = new JComboBox();
+
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher"}));
 		comboBox.setToolTipText("");
-		comboBox.setBounds(188, 213, 64, 20);
+		comboBox.setBounds(291, 213, 64, 20);
 		contentPane.add(comboBox);
 		
 		JButton btnUpadte = new JButton("Upadte");
@@ -172,5 +178,9 @@ public class UpdateMemberForm extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBack.setBounds(247, 241, 89, 23);
 		contentPane.add(btnBack);
+		
+		
+		
+
 	}
 }

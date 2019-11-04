@@ -91,6 +91,12 @@ public class DeleteBook extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LibrarianSuccess.main(new String[]{});
+				frame.dispose();
+			}
+		});
 		btnNewButton_1.setBounds(254, 148, 89, 23);
 		contentPane.add(btnNewButton_1);
 	}

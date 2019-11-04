@@ -2,7 +2,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class IssueBookDao {
-	
+private	String bookcallno;
+private	int studentid;
+private	String studentname;
+private	String studentcontact;
 public static boolean checkBook(String bookcallno){
 	boolean status=false;
 	try{

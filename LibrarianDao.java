@@ -2,9 +2,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class LibrarianDao {
+private	int id;
+private	String name;
+private String password;
+private String email;
+private String address;
+private String city;
+private String contact;
 
-	
-	public static int save(String name,String password,String email,String address,String city,String contact){
+public static int save(String name,String password,String email,String address,String city,String contact){
 		int status=0;
 		try{
 			Connection con=DB.getConnection();
