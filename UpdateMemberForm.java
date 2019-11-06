@@ -152,8 +152,9 @@ public class UpdateMemberForm extends JFrame {
 			 String contact= textField_2.getText();
 			 String address= textField_3.getText();
 			 String type=comboBox.getSelectedItem().toString(); 
-             
-			 int i=MemberDao.update(id, name, contact, address, type);  		
+             if(type.equals("Student")){
+            	 int i=student.update(id, name, contact, address, type);
+			    		
 					if(i>0){
 						JOptionPane.showMessageDialog(UpdateMemberForm.this,"Record update successfully!");
 						LibrarianSuccess.main(new String[]{});
@@ -163,6 +164,23 @@ public class UpdateMemberForm extends JFrame {
 						else
 				    	JOptionPane.showMessageDialog(UpdateMemberForm.this,"Record not update successfully!");
 			}
+             else if(type.equals("Teacher"))
+             {
+            	    int i=teacher.update(id, name, contact, address, type);    		
+					if(i>0){
+						JOptionPane.showMessageDialog(UpdateMemberForm.this,"Record update successfully!");
+						LibrarianSuccess.main(new String[]{});
+					 frame.dispose();
+					
+					}
+						else
+				    	JOptionPane.showMessageDialog(UpdateMemberForm.this,"Record not update successfully!"); 
+             }
+             else
+             {
+            	   	JOptionPane.showMessageDialog(UpdateMemberForm.this,"Record not update successfully!");
+             }
+		}
 		});
 		btnUpadte.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnUpadte.setBounds(84, 241, 89, 23);

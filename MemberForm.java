@@ -99,9 +99,11 @@ public class MemberForm extends JFrame {
 	             String type=comboBox.getSelectedItem().toString();		    
 			   
 			   //  System.out.println(type);
-			  int i=MemberDao.save(name, contact, address, type);           
+	           if(type.equals("Teacher")){  
+			 int i= teacher.save(name, contact, address, type);
+	        //   int i=MemberDao.save(name, contact, address, type);           
 			  if(i>0){
-					JOptionPane.showMessageDialog(MemberForm.this,"Books added successfully!");
+					JOptionPane.showMessageDialog(MemberForm.this,"Teacher added successfully!");
 					LibrarianSuccess.main(new String[]{});
 					
 					frame.dispose();
@@ -110,6 +112,25 @@ public class MemberForm extends JFrame {
 					JOptionPane.showMessageDialog(MemberForm.this,"Sorry, unable to save!");
 				}
 			}
+	           else if(type.equals("Student")){
+	        	int i=   student.save(name, contact, address, type);
+	        	 
+	   	        //   int i=MemberDao.save(name, contact, address, type);           
+	   			  if(i>0){
+	   					JOptionPane.showMessageDialog(MemberForm.this,"Student added successfully!");
+	   					LibrarianSuccess.main(new String[]{});
+	   					
+	   					frame.dispose();
+	   				
+	   				}else{
+	   					JOptionPane.showMessageDialog(MemberForm.this,"Sorry, unable to save!");
+	   				}	   
+	           }   
+	           else
+	           {
+	        	   JOptionPane.showMessageDialog(MemberForm.this,"Sorry, unable to savess!");
+	           }
+		     }
 		});
 		
 		JButton btnBack = new JButton("Back");
